@@ -12,10 +12,10 @@ document.addEventListener("DOMContentLoaded", function() {
                 let gameType = this.getAttribute("data-type");
                 runGame(gameType);
             }
-        })
+        });
     }
     runGame("addition");
-})
+});
 
 /** The main game 'loop', called when the script is first loaded
  * and after the user's answer has been processed.
@@ -26,7 +26,7 @@ function runGame(gameType) {
  let num2 = Math.floor(Math.random() * 25) + 1;
 
  if(gameType === "addition") {
-    displayAdditionQuestion(num1, + num2);
+    displayAdditionQuestion(num1, num2);
  } else {
     alert(`unknown game type: ${gameType}`);
     throw `unknown game type: ${gameType}. Aborting!`;
@@ -43,10 +43,10 @@ function checkAnswer() {
     if (isCorrect) {
         alert("Hey! You got it right! :D");
     } else {
-        alert(`Aww.. you answered ${userAnswer}. The correct answer was ${calculatedAnswer[0]}!`)
+        alert(`Aww.. you answered ${userAnswer}. The correct answer was ${calculatedAnswer[0]}!`);
     }
 
-    runGame(calculateAnswer[1]);
+    runGame(calculatedAnswer[1]);
 }
 /** Gets the operands (numbers) and the operator (plus, minus etc.)
  * directly from the DOM, and returns the correct answer.
@@ -57,22 +57,26 @@ function calculateCorrectAnswer() {
   let operator = document.getElementById('operator').innerText;
 
   if (operator === "+") {
-    return [operand1, operand2, "addition"];
+    return [operand1 + operand2, "addition"];
   } else {
     alert(`Unimplemented operator ${operator}`);
     throw `Unimplemented operator ${operator}. Aborting!`;
   }
 }
+/**
+ * Gets the current score from the DOM and increments by 1
+ */
 function incrementScore() {
-
+  let oldScore = parseInt(document.getElementById("score").innerText);
+  document.getElementById("score").innerText = ++oldScore;
 }
 function incrementWrongAnswer() {
 
 }
 function displayAdditionQuestion(operand1, operand2) {
-    document.getElementById("operand1").textContent = operand1;
-    document.getElementById("operand2").textContent = operand2;
-    document.getElementById("operator").textContent = "+";
+    document.getElementById('operand1').textContent = operand1;
+    document.getElementById('operand2').textContent = operand2;
+    document.getElementById('operator').textContent = "+";
 
 }
 function displaySubtractQuestion() {
