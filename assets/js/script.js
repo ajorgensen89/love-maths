@@ -1,5 +1,5 @@
-// wait for Dom to Load
-//
+// wait for Dom to finish loading before running the game
+// Get the button elements and add event listeners to them.
 
 document.addEventListener("DOMContentLoaded", function() {
     let buttons = document.getElementsByTagName("button");
@@ -27,7 +27,9 @@ function runGame(gameType) {
 
  if(gameType === "addition") {
     displayAdditionQuestion(num1, num2);
- } else {
+ } else if (gameType === "multiply") {
+    displayMultiplyQuestion(num1, num2);
+ }else {
     alert(`unknown game type: ${gameType}`);
     throw `unknown game type: ${gameType}. Aborting!`;
  }
@@ -60,7 +62,9 @@ function calculateCorrectAnswer() {
 
   if (operator === "+") {
     return [operand1 + operand2, "addition"];
-  } else {
+  } else if (operator === "x") {
+    return [operand1 * operand2, "multiply"];
+} else {
     alert(`Unimplemented operator ${operator}`);
     throw `Unimplemented operator ${operator}. Aborting!`;
   }
@@ -85,10 +89,12 @@ function displayAdditionQuestion(operand1, operand2) {
     document.getElementById('operator').textContent = "+";
 
 }
-function displaySubtractQuestion() {
-
+function displaySubtractQuestion(operand1, operand2) {
+    
 }
-function displayMultiplyQuestion() {
-
+function displayMultiplyQuestion(operand1, operand2) {
+    document.getElementById('operand1').textContent = operand1;
+    document.getElementById('operand2').textContent = operand2;
+    document.getElementById('operator').textContent = "x";
 }
 
